@@ -7,16 +7,23 @@ import sys
 import json
 import struct
 import subprocess
+import queue
+import threading
+
+stdin_queue = queue.Queue()
 
 
-# Read a message from stdin and decode it.
-def get_message():
-    raw_length = sys.stdin.buffer.read(4)
-    if len(raw_length) == 0:
-        return
-    message_length = struct.unpack('@I', raw_length)[0]
-    message = sys.stdin.buffer.read(message_length).decode('utf-8')
-    return json.loads(message)
+def stdin_worker():
+    while True:
+        raw_length = sys.stdin.buffer.read(4)
+        if len(raw_length) == 0:
+            continue
+        message_length = struct.unpack('@I', raw_length)[0]
+        message = sys.stdin.buffer.read(message_length).decode('utf-8')
+        stdin_queue.put(json.loads(message))
+
+
+threading.Thread(target=stdin_worker, daemon=True).start()
 
 
 # Encode a message for transmission,
@@ -40,15 +47,24 @@ def send_message(encoded_message):
 
 
 while True:
-    received_message = get_message()
+    received_message = stdin_queue.get()
+    if not received_message['command']:
+        continue
 
-    proc = subprocess.Popen(received_message['content'],
+    proc = subprocess.Popen(received_message['command'],
                             stdout=subprocess.PIPE,
                             stderr=subprocess.PIPE,
                             text=True,
                             shell=True)
 
     while proc.poll() is None:
+        try:
+            received_message = stdin_queue.get_nowait()
+            if received_message['signal']:
+                proc.send_signal(received_message['signal'])
+        except queue.Empty:
+            pass
+
         b = proc.stdout.readline().rstrip()
         if b:
             send_message(encode_message(b))
