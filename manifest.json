@@ -7,8 +7,7 @@
   "description": "Allows you to open a native shell in the browser",
 
   "icons": {
-    "48": "icons/icon-48.webp",
-    "96": "icons/icon-96.webp"
+    "512": "icons/icon.png"
   },
 
   "browser_specific_settings": {
@@ -27,7 +26,10 @@
   "web_accessible_resources": [
     "html/terminal.html",
     "css/common.css",
-    "node_modules/"
+    "node_modules/common-web-styles/dist/common.css",
+    "node_modules/xterm/lib/xterm.js",
+    "node_modules/xterm-addon-web-links/lib/xterm-addon-web-links.js",
+    "node_modules/xterm/css/xterm.css"
   ],
 
   "background": {

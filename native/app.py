@@ -26,24 +26,28 @@ def stdin_worker():
 threading.Thread(target=stdin_worker, daemon=True).start()
 
 
-# Encode a message for transmission,
-# given its content.
-def encode_message(message_content: str, return_code=''):
+def encode_message(message_content):
     # https://docs.python.org/3/library/json.html#basic-usage
     # To get the most compact JSON representation, you should specify
     # (',', ':') to eliminate whitespace.
     # We want the most compact representation because the browser rejects # messages that exceed 1 MB.
-    msg = {'content': message_content, 'return_code': return_code}
-    encoded_content = json.dumps(msg, separators=(',', ':')).encode('utf-8')
+    encoded_content = json.dumps(message_content, separators=(',', ':')).encode('utf-8')
     encoded_length = struct.pack('@I', len(encoded_content))
     return {'length': encoded_length, 'content': encoded_content}
 
 
-# Send an encoded message to stdout
-def send_message(encoded_message):
+def send_message_raw(encoded_message):
     sys.stdout.buffer.write(encoded_message['length'])
     sys.stdout.buffer.write(encoded_message['content'])
     sys.stdout.buffer.flush()
+
+
+def send_content(content):
+    send_message_raw(encode_message({'content': content}))
+
+
+def send_return_code(code):
+    send_message_raw(encode_message({'return_code': code}))
 
 
 while True:
@@ -67,13 +71,14 @@ while True:
 
         b = proc.stdout.readline().rstrip()
         if b:
-            send_message(encode_message(b))
+            send_content(b)
 
     # Just in case so bytes don't get lost
     last_bytes = proc.stdout.read()
     if last_bytes:
-        send_message(encode_message(last_bytes))
+        send_content(last_bytes)
 
     if proc.returncode != 0:
-        send_message(encode_message(proc.stderr.read()))
-    send_message(encode_message('', str(proc.returncode)))
+        send_content(proc.stderr.read())
+
+    send_return_code(str(proc.returncode))
