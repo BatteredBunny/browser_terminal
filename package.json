@@ -3,12 +3,10 @@
   "version": "1.0.0",
   "description": "Allows you to open a native shell in the browser",
   "scripts": {
-    "dev": "npm run install-native-manifest && web-ext run",
+    "dev": "npm run native-manifest install && web-ext run",
     "build": "web-ext build",
     "lint": "web-ext lint",
-    "build-native-manifest": "node build_native_manifest.js",
-    "install-native-manifest": "npm run build-native-manifest && cp browser_terminal.json ~/.mozilla/native-messaging-hosts/browser_terminal.json",
-    "uninstall-native-manifest": "rm ~/.mozilla/native-messaging-hosts/browser_terminal.json"
+    "native-manifest": "node native_manifest.js"
   },
   "devDependencies": {
     "@types/firefox-webext-browser": "^111.0.1",
