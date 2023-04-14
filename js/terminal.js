@@ -12,8 +12,8 @@ let current_command = "";
 let term = new Terminal({
     fontFamily: '"Fira Code", courier-new, courier, monospace, "Powerline Extra Symbols"'
 });
-const fitAddon = new FitAddon.FitAddon();
-term.loadAddon(fitAddon);
+
+term.loadAddon(new WebLinksAddon.WebLinksAddon());
 term.open(TERMINAL);
 
 term.prompt = (return_code) => {
@@ -25,7 +25,6 @@ term.prompt = (return_code) => {
 };
 
 term.prompt()
-fitAddon.fit();
 
 term.onKey((e) => {
     const ev = e.domEvent;
@@ -33,11 +32,9 @@ term.onKey((e) => {
 
     if (ev.key === "Enter") {
         let last_command = current_command;
-        console.log(last_command)
         current_command = "";
+        term.write('\r\n');
         send_command(last_command)
-
-        term.prompt();
     } else if (ev.key === "Backspace") {
         // Do not delete the prompt
         if (term._core.buffer.x > 2) {
@@ -73,7 +70,7 @@ function send_signal(signal) {
 
 // Receives response from native
 port.onMessage.addListener((response) => {
-    console.log(`"${response.content}"`);
+    console.log(`"Received: ${JSON.stringify(response)}"`);
     if (response.content) {
         term.writeln(response.content);
     }

@@ -7,9 +7,9 @@ dependencies:
   xterm:
     specifier: ^5.1.0
     version: 5.1.0
-  xterm-addon-fit:
-    specifier: ^0.7.0
-    version: 0.7.0(xterm@5.1.0)
+  xterm-addon-web-links:
+    specifier: ^0.8.0
+    version: 0.8.0(xterm@5.1.0)
 
 devDependencies:
   '@types/firefox-webext-browser':
@@ -3155,8 +3155,8 @@ packages:
     engines: {node: '>=4.0'}
     dev: true
 
-  /xterm-addon-fit@0.7.0(xterm@5.1.0):
-    resolution: {integrity: sha512-tQgHGoHqRTgeROPnvmtEJywLKoC/V9eNs4bLLz7iyJr1aW/QFzRwfd3MGiJ6odJd9xEfxcW36/xRU47JkD5NKQ==}
+  /xterm-addon-web-links@0.8.0(xterm@5.1.0):
+    resolution: {integrity: sha512-J4tKngmIu20ytX9SEJjAP3UGksah7iALqBtfTwT9ZnmFHVplCumYQsUJfKuS+JwMhjsjH61YXfndenLNvjRrEw==}
     peerDependencies:
       xterm: ^5.0.0
     dependencies:
