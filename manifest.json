@@ -1,0 +1,34 @@
+{
+
+  "manifest_version": 2,
+  "name": "browser-terminal-extension",
+  "version": "1.0",
+
+  "description": "Allows you to open a native shell in the browser",
+
+  "icons": {
+    "48": "icons/icon-48.webp",
+    "96": "icons/icon-96.webp"
+  },
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "browser_terminal@example.org",
+      "strict_min_version": "50.0"
+    }
+  },
+
+  "permissions": [ "nativeMessaging" ],
+
+  "browser_action": {},
+
+  "web_accessible_resources": [
+    "html/terminal.html",
+    "css/common.css",
+    "node_modules/"
+  ],
+
+  "background": {
+    "scripts": ["/js/background.js"]
+  }
+}

@@ -1,0 +1,13 @@
+.terminal {
+    border-radius: 10px;
+    padding: 20px;
+    overflow: scroll;
+}
+
+.row {
+    display: flex;
+}
+
+.row * {
+    margin-left: 3px;
+}

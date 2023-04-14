@@ -1,0 +1,13 @@
+{
+  "name": "browser-terminal-extension",
+  "version": "1.0.0",
+  "description": "Allows you to open a native shell in the browser",
+  "devDependencies": {
+    "@types/firefox-webext-browser": "^111.0.1"
+  },
+  "dependencies": {
+    "common-web-styles": "github:ayes-web/common-web-styles",
+    "xterm": "^5.1.0",
+    "xterm-addon-fit": "^0.7.0"
+  }
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal</title>
+    <link rel="icon" href="/icons/icon-96.webp" type="image/webp">
+    <link rel="icon" href="/icons/icon-48.webp" type="image/webp">
+    <link rel="stylesheet" href="/node_modules/common-web-styles/dist/common.css">
+    <link rel="stylesheet" href="/css/terminal.css">
+    <script src="/node_modules/xterm/lib/xterm.js"></script>
+    <script src="/node_modules/xterm-addon-fit/lib/xterm-addon-fit.js"></script>
+    <link rel="stylesheet" href="/node_modules/xterm/css/xterm.css">
+    <script src="/js/terminal.js" type="module"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div id="terminal" class="terminal"></div>
+
+        <div class="row">
+            <button id="kill_button">Kill</button>
+
+            <form id="terminal_form">
+                <input type="text" name="input" id="terminal_input" placeholder="command">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
