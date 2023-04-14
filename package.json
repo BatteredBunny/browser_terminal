@@ -2,8 +2,17 @@
   "name": "browser-terminal-extension",
   "version": "1.0.0",
   "description": "Allows you to open a native shell in the browser",
+  "scripts": {
+    "run": "npm run install-native-manifest && web-ext run",
+    "build":"web-ext build",
+
+    "build-native-manifest": "node build_native_manifest.js",
+    "install-native-manifest": "npm run build-native-manifest && cp browser_terminal.json ~/.mozilla/native-messaging-hosts/browser_terminal.json",
+    "uninstall-native-manifest": "rm ~/.mozilla/native-messaging-hosts/browser_terminal.json"
+  },
   "devDependencies": {
-    "@types/firefox-webext-browser": "^111.0.1"
+    "@types/firefox-webext-browser": "^111.0.1",
+    "web-ext": "^7.6.1"
   },
   "dependencies": {
     "common-web-styles": "github:ayes-web/common-web-styles",
