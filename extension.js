@@ -17,6 +17,7 @@ function find(dir) {
 
 const SRC_DIR = "src";
 const BUILD_DIR = "dist";
+const WEB_EXT = "web-ext-artifacts";
 
 const ESBUILD_OPTIONS = {
     entryPoints: find(SRC_DIR),
@@ -29,6 +30,8 @@ const ESBUILD_OPTIONS = {
 
 const WEBEXT_OPTIONS = {
     sourceDir: path.resolve(BUILD_DIR),
+    artifactsDir: path.resolve(WEB_EXT),
+    noInput: true,
 }
 
 async function dev_build() {
@@ -54,7 +57,7 @@ switch (process.argv[2]) {
         break
     case "build":
         await esbuild.build(ESBUILD_OPTIONS)
-        // await webExt.cmd.build(WEBEXT_OPTIONS, {})
+        await webExt.cmd.build(WEBEXT_OPTIONS, {})
         break
     default:
         console.log("Invalid argument: Please choose either 'start' or 'build'")
