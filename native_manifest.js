@@ -5,10 +5,12 @@ const os = require("os");
 const LINUX_PATH = "~/.mozilla/native-messaging-hosts/";
 const DARWIN_PATH = "~/Library/Application Support/Mozilla/NativeMessagingHosts/";
 
+const NATIVE_APP_PATH = path.join(__dirname, "native", "app.py");
+
 const MANIFEST = {
     "name": "browser_terminal",
     "description": "Allows you to open a native shell in the browser",
-    "path": path.join(__dirname, "native") + "app.py",
+    "path": NATIVE_APP_PATH,
     "type": "stdio",
     "allowed_extensions": ["browser_terminal@example.org"]
 }
