@@ -25,12 +25,13 @@ const MANIFEST = {
     "description": "Extension that allows you to open a native shell in the browser",
     "path": NATIVE_APP_PATH,
     "type": "stdio",
-    "allowed_extensions": ["browser_terminal@example.org"]
+    "allowed_origins": ["chrome-extension://ljjadcjbpfpnfgaomjlbamjddjamlcpf/"]
 }
 
 function manifest_path_build(manifest_path) {
     return path.join(manifest_path, MANIFEST.name + '.json').replace(/^~\//, os.homedir() + '/');
 }
+
 function get_manifest_path(browser) {
     let manifest_path = NATIVE_MANIFEST_PATHS[process.platform][browser]
     if (!manifest_path) {
@@ -53,13 +54,21 @@ function uninstall_manifest(path) {
 
 switch (process.argv[2]) {
     case "install:chrome":
+        if (process.argv[3]) {
+            MANIFEST.allowed_origins = [process.argv[3]]
+        }
         install_manifest(get_manifest_path("chrome"))
         break
     case "install:chromium":
+        if (process.argv[3]) {
+            MANIFEST.allowed_origins = [process.argv[3]]
+        }
         install_manifest(get_manifest_path("chromium"))
         break
     case "install:firefox":
     case "install":
+        MANIFEST.allowed_extensions = ["browser_terminal@example.org"]
+        MANIFEST.allowed_origins = undefined
         install_manifest(get_manifest_path("firefox"))
         break
     case "install:all":

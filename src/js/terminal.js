@@ -1,5 +1,5 @@
-import { Terminal } from "xterm";
-import { WebLinksAddon } from "xterm-addon-web-links";
+import {Terminal} from "xterm";
+import {WebLinksAddon} from "xterm-addon-web-links";
 import browser from "webextension-polyfill";
 
 const TERMINAL = document.getElementById("terminal");
@@ -7,6 +7,7 @@ const KILL_BUTTON = document.getElementById("kill_button");
 
 const EXTENSION_NAME = "browser_terminal";
 let port = browser.runtime.connectNative(EXTENSION_NAME);
+
 
 // history
 let last_command = "";
