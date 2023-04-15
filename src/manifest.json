@@ -2,9 +2,8 @@
 
   "manifest_version": 2,
   "name": "browser-terminal-extension",
-  "version": "1.0",
-
-  "description": "Allows you to open a native shell in the browser",
+  "version": "1.1",
+  "description": "Extension that allows you to open a native shell in the browser",
 
   "icons": {
     "512": "icons/icon.png"
@@ -25,11 +24,9 @@
 
   "web_accessible_resources": [
     "html/terminal.html",
-    "css/common.css",
-    "node_modules/common-web-styles/dist/common.css",
-    "node_modules/xterm/lib/xterm.js",
-    "node_modules/xterm-addon-web-links/lib/xterm-addon-web-links.js",
-    "node_modules/xterm/css/xterm.css"
+    "css/terminal.css",
+    "js/terminal.js",
+    "icons/icon.png"
   ],
 
   "background": {

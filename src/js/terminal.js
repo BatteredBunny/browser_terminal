@@ -1,3 +1,7 @@
+import { Terminal } from "xterm";
+import { WebLinksAddon } from "xterm-addon-web-links";
+import browser from "webextension-polyfill";
+
 const TERMINAL = document.getElementById("terminal");
 const KILL_BUTTON = document.getElementById("kill_button");
 
@@ -13,7 +17,7 @@ let term = new Terminal({
     fontFamily: '"Fira Code", courier-new, courier, monospace, "Powerline Extra Symbols"'
 });
 
-term.loadAddon(new WebLinksAddon.WebLinksAddon());
+term.loadAddon(new WebLinksAddon());
 term.open(TERMINAL);
 
 term.prompt = (return_code) => {

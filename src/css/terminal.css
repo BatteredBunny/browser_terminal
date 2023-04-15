@@ -1,3 +1,6 @@
+@import "xterm/css/xterm.css";
+@import "common-web-styles/dist/common.css";
+
 .terminal {
     border-radius: 10px;
     padding: 20px;

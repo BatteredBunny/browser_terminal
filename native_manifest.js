@@ -1,43 +1,104 @@
-const fs = require('fs');
-const path = require("path");
-const os = require("os");
+import fs from "fs";
+import path from "path";
+import os from "os";
 
-const LINUX_PATH = "~/.mozilla/native-messaging-hosts/";
-const DARWIN_PATH = "~/Library/Application Support/Mozilla/NativeMessagingHosts/";
+const __dirname = path.resolve(path.dirname(''));
+
+const NATIVE_MANIFEST_PATHS = {
+    "linux": {
+        "firefox": "~/.mozilla/native-messaging-hosts/",
+        "chrome": "~/.config/google-chrome/NativeMessagingHosts/",
+        "chromium": "/.config/chromium/NativeMessagingHosts/",
+    },
+
+    "darwin": {
+        "firefox": "~/Library/Application Support/Mozilla/NativeMessagingHosts/",
+        "chrome": "~/Library/Application Support/Google/Chrome/NativeMessagingHosts/",
+        "chromium": "~/Library/Application Support/Chromium/NativeMessagingHosts/",
+    }
+}
 
 const NATIVE_APP_PATH = path.join(__dirname, "native", "app.py");
 
 const MANIFEST = {
     "name": "browser_terminal",
-    "description": "Allows you to open a native shell in the browser",
+    "description": "Extension that allows you to open a native shell in the browser",
     "path": NATIVE_APP_PATH,
     "type": "stdio",
-    "allowed_extensions": ["browser_terminal@example.org"]
+    "allowed_extensions": ["browser_terminal@example.org", "chrome-extension://ljjadcjbpfpnfgaomjlbamjddjamlcpf/"]
 }
 
-function get_manifest_path() {
-    switch (process.platform) {
-        case "darwin":
-            return path.join(DARWIN_PATH, MANIFEST.name + '.json').replace(/^~\//, os.homedir() + '/');
-        case "linux":
-            return path.join(LINUX_PATH, MANIFEST.name + '.json').replace(/^~\//, os.homedir() + '/');
-        default:
-            console.log("Unsupported system")
-            process.exit(1);
+function manifest_path_build(manifest_path) {
+    return path.join(manifest_path, MANIFEST.name + '.json').replace(/^~\//, os.homedir() + '/');
+}
+function get_manifest_path(browser) {
+    let manifest_path = NATIVE_MANIFEST_PATHS[process.platform][browser]
+    if (!manifest_path) {
+        console.log("Unsupported browser or system")
+        process.exit(1);
     }
+
+    return manifest_path_build(manifest_path)
+}
+
+let manifest_location;
+
+function install_manifest(path) {
+    console.log(`Installing native manifest to "${path}"`)
+    fs.writeFileSync(path, JSON.stringify(MANIFEST));
+}
+
+function uninstall_manifest(path) {
+    console.log(`Removing native manifest from "${path}"`)
+    fs.rmSync(path)
 }
 
 switch (process.argv[2]) {
+    case "install:chrome":
+        install_manifest(get_manifest_path("chrome"))
+        break
+    case "install:chromium":
+        install_manifest(get_manifest_path("chromium"))
+        break
+    case "install:firefox":
     case "install":
-        let install_location = get_manifest_path()
-        console.log(`Installing native manifest to "${install_location}"`)
-        fs.writeFileSync(install_location, JSON.stringify(MANIFEST));
+        install_manifest(get_manifest_path("firefox"))
         break
+    case "install:all":
+        let install_paths = NATIVE_MANIFEST_PATHS[process.platform]
+        if (!install_paths) {
+            console.log("Unsupported system")
+            process.exit(1)
+        }
+
+        for (let path of Object.values(install_paths)) {
+            install_manifest(manifest_path_build(path))
+        }
+        break
+
+    case "uninstall:chrome":
+        uninstall_manifest(get_manifest_path("chrome"))
+        break
+    case "uninstall:chromium":
+        uninstall_manifest(get_manifest_path("chromium"))
+        break
+    case "uninstall:firefox":
     case "uninstall":
-        let uninstall_location = get_manifest_path()
-        console.log(`Removing native manifest from "${uninstall_location}"`)
-        fs.rmSync(uninstall_location)
+        uninstall_manifest(get_manifest_path("firefox"))
         break
+    case "uninstall:all":
+        let uninstall_paths = NATIVE_MANIFEST_PATHS[process.platform]
+        if (!uninstall_paths) {
+            console.log("Unsupported system")
+            process.exit(1)
+        }
+
+        for (let path of Object.values(uninstall_paths)) {
+            uninstall_manifest(manifest_path_build(path))
+        }
+        break
+
+
     default:
         console.log("Invalid argument: Please choose either 'install' or 'uninstall'")
 }
