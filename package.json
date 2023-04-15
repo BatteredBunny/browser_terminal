@@ -8,7 +8,6 @@
     "start:chrome": "npm run native-manifest install:chrome && npm run extension start:chrome; npm run native-manifest uninstall:chrome",
     "start:chromium": "npm run native-manifest install:chromium && npm run extension start:chromium; npm run native-manifest uninstall:chromium",
     "build": "npm run extension build",
-    "build:chrome": "npm run extension build:chrome",
     "lint": "web-ext lint",
     "native-manifest": "node native_manifest.js",
     "extension": "node extension.js"

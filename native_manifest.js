@@ -25,7 +25,7 @@ const MANIFEST = {
     "description": "Extension that allows you to open a native shell in the browser",
     "path": NATIVE_APP_PATH,
     "type": "stdio",
-    "allowed_extensions": ["browser_terminal@example.org", "chrome-extension://ljjadcjbpfpnfgaomjlbamjddjamlcpf/"]
+    "allowed_extensions": ["browser_terminal@example.org"]
 }
 
 function manifest_path_build(manifest_path) {
@@ -40,8 +40,6 @@ function get_manifest_path(browser) {
 
     return manifest_path_build(manifest_path)
 }
-
-let manifest_location;
 
 function install_manifest(path) {
     console.log(`Installing native manifest to "${path}"`)
