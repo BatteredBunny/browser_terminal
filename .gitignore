@@ -3,4 +3,3 @@ node_modules
 .idea
 .vscode
 web-ext-artifacts
-browser_terminal.json
