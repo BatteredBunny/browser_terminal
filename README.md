@@ -1,25 +1,35 @@
 # browser-terminal-extension
 
-This probably only works on linux, haven't tested it on anything else.
+Extension that allows you to open a native shell in the browser
+
+Untested on windows
+
+```
+git clone https://github.com/ayes-web/browser-terminal-extension
+pnpm install
+```
 
 ## Dependencies
    - python3
    - nodejs + npm/pnpm
-   - firefox
 
-## Running in development mode
+## Running with firefox in development mode
 ```
-pnpm dev
+pnpm start
 ```
 
-### Install native manifest
+## Installing unpacked extension to firefox
+
+### 1. Install native manifest & build extension
 ```
 pnpm native-manifest install
+pnpm build
 ```
-### Uninstall native manifest
-```
-pnpm native-manifest uninstall
-```
+
+### 2. Install extension to firefox
+1. Navigate to ``about:debugging#/runtime/this-firefox``
+2. Click ``Load temporary Add-on...``
+3. Choose ``dist`` folder in the file picker
 
 ## Usage
 
