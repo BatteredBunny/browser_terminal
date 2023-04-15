@@ -21,6 +21,9 @@ function get_manifest_path() {
             return path.join(DARWIN_PATH, MANIFEST.name + '.json').replace(/^~\//, os.homedir() + '/');
         case "linux":
             return path.join(LINUX_PATH, MANIFEST.name + '.json').replace(/^~\//, os.homedir() + '/');
+        default:
+            console.log("Unsupported system")
+            process.exit(1);
     }
 }
 
