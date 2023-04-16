@@ -10,7 +10,7 @@ pnpm install
 ```
 
 ## Dependencies
-   - python3
+   - golang
    - nodejs + npm/pnpm
 
 ## Running with firefox in development mode

@@ -1,17 +1,17 @@
-import {Terminal} from "xterm";
-import {WebLinksAddon} from "xterm-addon-web-links";
+import { Terminal } from "xterm";
+import { WebLinksAddon } from "xterm-addon-web-links";
 import browser from "webextension-polyfill";
 
 const TERMINAL = document.getElementById("terminal");
+const BANNER = document.getElementById("banner");
 const KILL_BUTTON = document.getElementById("kill_button");
 
 const EXTENSION_NAME = "browser_terminal";
 let port = browser.runtime.connectNative(EXTENSION_NAME);
 
-
-// history
-let last_command = "";
-let current_command = "";
+port.onDisconnect.addListener(() => {
+    BANNER.classList.add("red-banner")
+})
 
 // xterm stuff
 let term = new Terminal({
@@ -21,54 +21,22 @@ let term = new Terminal({
 term.loadAddon(new WebLinksAddon());
 term.open(TERMINAL);
 
-term.prompt = (return_code) => {
-    if (return_code === undefined) {
-        term.write('\r\n$ ');
-    } else {
-        term.write(`\r\n[${return_code}] $ `);
-    }
-};
-
-term.prompt()
-
-term.onKey((e) => {
-    const ev = e.domEvent;
-    const printable = !ev.altKey && !ev.ctrlKey && !ev.metaKey;
-
-    if (ev.key === "Enter") {
-        let last_command = current_command;
-        current_command = "";
-        term.write('\r\n');
-        send_command(last_command)
-    } else if (ev.key === "Backspace") {
-        // Do not delete the prompt
-        if (term._core.buffer.x > 2) {
-            term.write('\b \b');
-            current_command = current_command.slice(0, -1)
-        }
-    } else if (ev.key === "ArrowUp") {
-        // ev.preventDefault()
-        // // TODO: go back in history
-        // if (last_command !== "") {
-        //     current_command = last_command;
-        //     term.write(current_command)
-        // }
-    } else if (printable) {
-        current_command += e.key;
-        term.write(e.key);
-    }
-});
+term.onKey((e) => send_command(e.key));
 
 term.focus();
 
+function send_message(json) {
+    port.postMessage(json)
+}
+
 function send_command(command) {
-    port.postMessage({
+    send_message({
         command: command,
     });
 }
 
 function send_signal(signal) {
-    port.postMessage({
+    send_message({
         signal: signal
     });
 }
@@ -76,16 +44,8 @@ function send_signal(signal) {
 // Receives response from native
 port.onMessage.addListener((response) => {
     console.log(`"Received: ${JSON.stringify(response)}"`);
-    if (response.content) {
-        term.writeln(response.content);
-    }
-
-    if (response.return_code) {
-        if (response.return_code !== "0") {
-            term.prompt(response.return_code)
-        } else {
-            term.prompt()
-        }
+    if (response.c) {
+        term.write(response.c);
     }
 });
 

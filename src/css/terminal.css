@@ -1,6 +1,10 @@
 @import "xterm/css/xterm.css";
 @import "common-web-styles/dist/common.css";
 
+html, body {
+    margin: 0px;
+}
+
 .terminal {
     border-radius: 10px;
     padding: 20px;
@@ -13,4 +17,16 @@
 
 .row * {
     margin-left: 3px;
+}
+
+
+.banner {
+    padding: 10px;
+    color: transparent;
+    text-align: center;
+}
+
+.red-banner {
+    background-color: red;
+    color: unset;
 }
