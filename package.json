@@ -3,15 +3,16 @@
   "version": "1.1.0",
   "description": "Extension that allows you to open a native shell in the browser",
   "scripts": {
-    "start": "npm run native-manifest install && npm run extension start; npm run native-manifest uninstall",
-    "start:firefox": "npm run native-manifest install:firefox && npm run extension start:firefox; npm run native-manifest uninstall:firefox",
-    "start:chrome": "npm run native-manifest install:chrome && npm run extension start:chrome; npm run native-manifest uninstall:chrome",
-    "start:chromium": "npm run native-manifest install:chromium && npm run extension start:chromium; npm run native-manifest uninstall:chromium",
+    "start": "npm run build_native && npm run native-manifest install && npm run extension start; npm run native-manifest uninstall",
+    "start:firefox": "npm run build_native && npm run native-manifest install:firefox && npm run extension start:firefox; npm run native-manifest uninstall:firefox",
+    "start:chrome": "npm run build_native && npm run native-manifest install:chrome && npm run extension start:chrome; npm run native-manifest uninstall:chrome",
+    "start:chromium": "npm run build_native && npm run native-manifest install:chromium && npm run extension start:chromium; npm run native-manifest uninstall:chromium",
     "build": "npm run extension build",
     "lint": "web-ext lint -s src",
     "sign": "web-ext sign",
     "native-manifest": "node native_manifest.js",
-    "extension": "node extension.js"
+    "extension": "node extension.js",
+    "build_native": "go build -C native"
   },
   "devDependencies": {
     "@types/firefox-webext-browser": "^111.0.1",

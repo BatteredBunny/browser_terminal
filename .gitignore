@@ -1,6 +1,7 @@
-.pytest_cache
 node_modules
 .idea
 .vscode
 dist
 web-ext-artifacts
+native/browser_terminal
+.DS_STORE
