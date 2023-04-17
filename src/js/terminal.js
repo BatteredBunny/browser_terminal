@@ -43,7 +43,7 @@ function send_signal(signal) {
 
 // Receives response from native
 port.onMessage.addListener((response) => {
-    console.log(`"Received: ${JSON.stringify(response)}"`);
+    console.log(`Received: "${JSON.stringify(response)}"`);
     if (response.c) {
         term.write(response.c);
     }

@@ -23,7 +23,7 @@ func sendBuffer(s strings.Builder, writer *bufio.Writer) {
 	}
 }
 
-func process_commands(c chan map[string]any, cmd *exec.Cmd) {
+func processCommands(c chan map[string]any, cmd *exec.Cmd) {
 	var stdout_buffer strings.Builder
 	cmd.Stdout = &stdout_buffer
 
@@ -36,7 +36,7 @@ func process_commands(c chan map[string]any, cmd *exec.Cmd) {
 	}
 
 	go func() {
-		if err := cmd.Run(); err != nil {
+		if err = cmd.Run(); err != nil {
 			log.Fatal(err)
 		}
 	}()
@@ -51,8 +51,6 @@ func process_commands(c chan map[string]any, cmd *exec.Cmd) {
 	}()
 
 	for msg := range c {
-		if _, err := fmt.Fprintln(stdin, msg["command"]); err != nil {
-			continue
-		}
+		_, _ = fmt.Fprintln(stdin, msg["command"])
 	}
 }
