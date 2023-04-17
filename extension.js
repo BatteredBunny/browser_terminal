@@ -25,13 +25,14 @@ const ESBUILD_OPTIONS = {
     outdir: BUILD_DIR,
     allowOverwrite: true,
     minify: true,
-    loader: {".json": "copy", ".png": "copy", ".html": "copy"},
+    loader: {".json": "copy", ".png": "copy", ".html": "copy", ".ttf": "copy"},
 }
 
 const WEBEXT_OPTIONS = {
     sourceDir: path.resolve(BUILD_DIR),
     artifactsDir: path.resolve(WEB_EXT),
     noInput: true,
+    overwriteDest: true,
 }
 
 async function dev_build() {

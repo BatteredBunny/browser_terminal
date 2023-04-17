@@ -15,7 +15,7 @@ port.onDisconnect.addListener(() => {
 
 // xterm stuff
 let term = new Terminal({
-    fontFamily: '"Fira Code", courier-new, courier, monospace, "Powerline Extra Symbols"'
+    fontFamily: '"FiraCode Nerd Font Mono", courier-new, courier, monospace'
 });
 
 term.loadAddon(new WebLinksAddon());

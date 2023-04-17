@@ -1,8 +1,20 @@
 @import "xterm/css/xterm.css";
 @import "common-web-styles/dist/common.css";
 
+@font-face {
+    font-family: FiraCode Nerd Font Mono;
+    src: url("../fonts/Fira Code Regular Nerd Font Complete Mono.ttf");
+}
+
+@font-face {
+    font-family: FiraCode Nerd Font Mono;
+    src: url("../fonts/Fira Code Bold Nerd Font Complete Mono.ttf");
+    font-weight: bold;
+}
+
 html, body {
     margin: 0px;
+    font-family: "FiraCode Nerd Font Mono", monospace;
 }
 
 .terminal {
