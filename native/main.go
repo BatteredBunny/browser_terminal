@@ -40,11 +40,23 @@ type Message struct {
 	Content string `json:"c"`
 }
 
+type DebugMessage struct {
+	Debug any `json:"d"`
+}
+
 func newMessage(Content string) Message {
 	return Message{Content}
 }
 
-func (m Message) send(w *bufio.Writer) (err error) {
+func sendDebugMessage(a any, w io.Writer) (err error) {
+	return sendMessage(DebugMessage{Debug: a}, w)
+}
+
+func (m Message) send(w io.Writer) (err error) {
+	return sendMessage(m, w)
+}
+
+func sendMessage[T Message | DebugMessage](m T, w io.Writer) (err error) {
 	var j []byte
 	j, err = json.Marshal(m)
 	if err != nil {
@@ -59,10 +71,6 @@ func (m Message) send(w *bufio.Writer) (err error) {
 	}
 
 	if _, err = w.Write(j); err != nil {
-		return
-	}
-
-	if err = w.Flush(); err != nil {
 		return
 	}
 
@@ -81,5 +89,5 @@ func main() {
 
 	cmd.Env = append(cmd.Environ(), "TERM_PROGRAM=browser_terminal")
 
-	process_commands(stdinQueue, cmd)
+	processCommands(stdinQueue, cmd)
 }

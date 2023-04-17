@@ -8,6 +8,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"sync"
 
 	"github.com/creack/pty"
 )
@@ -26,22 +27,50 @@ func (w NativeMessageWriter) Write(p []byte) (n int, err error) {
 	return w.writer.Write(p)
 }
 
-func (w NativeMessageWriter) ReadFrom(r io.Reader) (total_bytes int64, err error) {
-	ptmx_reader := bufio.NewReader(r)
+func (w NativeMessageWriter) Flush() error {
+	return w.writer.Flush()
+}
+
+func (w NativeMessageWriter) ReadFrom(r io.Reader) (totalBytes int64, err error) {
+	ptmxReader := bufio.NewReader(r)
+
+	var runes []rune
+	var runesMutex sync.Mutex
+
+	go func() {
+		var foundRune rune
+		var byteAmount int
+
+		for {
+			foundRune, byteAmount, err = ptmxReader.ReadRune()
+			if err != nil {
+				continue
+			}
+			totalBytes += int64(byteAmount)
+
+			runesMutex.Lock()
+			runes = append(runes, foundRune)
+			runesMutex.Unlock()
+		}
+	}()
 
 	for {
-		r, byte_amount, err := ptmx_reader.ReadRune()
-		total_bytes += int64(byte_amount)
-		if err != nil {
-			return total_bytes, err
+		runesMutex.Lock()
+		if len(runes) > 0 {
+			if err = newMessage(string(runes)).send(w); err != nil {
+				runesMutex.Unlock()
+				continue
+			}
+
+			w.Flush()
+
+			runes = []rune{}
 		}
-		if err := newMessage(string(r)).send(w.writer); err != nil {
-			continue
-		}
+		runesMutex.Unlock()
 	}
 }
 
-func process_commands(c chan map[string]any, cmd *exec.Cmd) {
+func processCommands(c chan map[string]any, cmd *exec.Cmd) {
 	ptmx, err := pty.Start(cmd)
 	if err != nil {
 		log.Fatal(err)
