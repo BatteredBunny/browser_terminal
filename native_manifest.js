@@ -39,6 +39,8 @@ function get_manifest_path(browser) {
         process.exit(1);
     }
 
+    fs.mkdirSync(manifest_path, { recursive: true } );
+
     return manifest_path_build(manifest_path)
 }
 
@@ -49,7 +51,11 @@ function install_manifest(path) {
 
 function uninstall_manifest(path) {
     console.log(`Removing native manifest from "${path}"`)
-    fs.rmSync(path)
+    try {
+        fs.rmSync(path)
+    } catch(err) {
+        console.log(`Error, no manifest found to remove: "${err}"`)
+    }
 }
 
 switch (process.argv[2]) {
