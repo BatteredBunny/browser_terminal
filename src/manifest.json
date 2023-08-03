@@ -1,27 +1,23 @@
 {
-
   "manifest_version": 2,
   "name": "browser-terminal-extension",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Extension that allows you to open a native shell in the browser",
-
   "icons": {
     "512": "icons/icon.png"
   },
-
   "browser_specific_settings": {
     "gecko": {
       "id": "browser_terminal@example.org",
       "strict_min_version": "55.0"
     }
   },
-
-  "permissions": [ "nativeMessaging" ],
-
+  "permissions": [
+    "nativeMessaging"
+  ],
   "browser_action": {
     "default_area": "navbar"
   },
-
   "web_accessible_resources": [
     "html/terminal.html",
     "css/terminal.css",
@@ -30,8 +26,9 @@
     "fonts/Fira Code Regular Nerd Font Complete Mono.ttf",
     "fonts/Fira Code Bold Nerd Font Complete Mono.ttf"
   ],
-
   "background": {
-    "scripts": ["/js/background.js"]
+    "scripts": [
+      "/js/background.js"
+    ]
   }
 }

@@ -18,7 +18,7 @@ const NATIVE_MANIFEST_PATHS = {
     }
 }
 
-const NATIVE_APP_PATH = path.join(__dirname, "native", "browser_terminal");
+const NATIVE_APP_PATH = path.join(__dirname, "native", "browser-terminal-extension");
 
 const MANIFEST = {
     "name": "browser_terminal",

@@ -87,7 +87,7 @@ func main() {
 		cmd.Dir = dir
 	}
 
-	cmd.Env = append(cmd.Environ(), "TERM_PROGRAM=browser_terminal")
+	cmd.Env = append(cmd.Environ(), "TERM_PROGRAM=browser-terminal-extension")
 
 	processCommands(stdinQueue, cmd)
 }

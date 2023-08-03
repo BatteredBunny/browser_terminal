@@ -1,5 +1,7 @@
 import { Terminal } from "xterm";
 import { WebLinksAddon } from "xterm-addon-web-links";
+import { FitAddon } from 'xterm-addon-fit';
+
 import browser from "webextension-polyfill";
 
 const TERMINAL = document.getElementById("terminal");
@@ -18,8 +20,15 @@ let term = new Terminal({
     fontFamily: '"FiraCode Nerd Font Mono", courier-new, courier, monospace'
 });
 
+const fitAddon = new FitAddon();
+term.loadAddon(fitAddon);
 term.loadAddon(new WebLinksAddon());
 term.open(TERMINAL);
+fitAddon.fit();
+
+document.body.onresize = () => {
+    fitAddon.fit();
+}
 
 term.onKey((e) => send_command(e.key));
 
@@ -43,7 +52,7 @@ function send_signal(signal) {
 
 // Receives response from native
 port.onMessage.addListener((response) => {
-    console.log(`Received: "${JSON.stringify(response)}"`);
+    console.debug(`Received: "${JSON.stringify(response)}"`);
     if (response.c) {
         term.write(response.c);
     }

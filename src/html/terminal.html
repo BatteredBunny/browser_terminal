@@ -12,12 +12,14 @@
 </head>
 
 <body>
-    <div id="banner" class="banner">Host has most likely crashed</div>
-    <div id="terminal" class="terminal"></div>
-    <div class="container">
-        <div class="row">
-            <button id="kill_button">Kill</button>
+    <div id="banner" class="banner">Host has most likely crashed! (or was killed)</div>
+
+    <div class="terminal-wrapper">
+        <div class="window-header">
+            <div class="title">Browser terminal</div>
+            <button id="kill_button">X</button>
         </div>
+        <div id="terminal" class="terminal"></div>
     </div>
 </body>
 
