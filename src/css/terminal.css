@@ -12,33 +12,46 @@
     font-weight: bold;
 }
 
-html, body {
+html,
+body {
     margin: 0px;
     font-family: "FiraCode Nerd Font Mono", monospace;
 }
 
+.terminal-wrapper {
+    margin: 0 5px 0 5px;
+    background-color: var(--interactive-background-color);
+    border-radius: 5px;
+}
+
+.window-header {
+    padding: 5px 10px 0 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .terminal {
-    border-radius: 10px;
-    padding: 20px;
+    border-radius: 5px;
+    padding: 5px;
     overflow: scroll;
 }
 
-.row {
-    display: flex;
-}
-
-.row * {
-    margin-left: 3px;
-}
-
-
 .banner {
-    padding: 10px;
+    padding: 5px;
     color: transparent;
     text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 .red-banner {
-    background-color: red;
+    background-color: #ff00007a;
     color: unset;
+}
+
+.title {
+    font-size: large;
+    font-weight: bold;
 }

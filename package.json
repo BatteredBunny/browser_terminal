@@ -1,6 +1,6 @@
 {
   "name": "browser-terminal-extension",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Extension that allows you to open a native shell in the browser",
   "scripts": {
     "start": "npm run build_native && npm run native-manifest install && npm run extension start; npm run native-manifest uninstall",
@@ -12,18 +12,20 @@
     "sign": "web-ext sign",
     "native-manifest": "node native_manifest.js",
     "extension": "node extension.js",
-    "build_native": "go build -C native"
+    "build_native": "go build -C native",
+    "clean": "rm -rf ./dist ./node_modules ./native/browser-terminal-extension"
   },
   "devDependencies": {
     "@types/firefox-webext-browser": "^111.0.1",
-    "esbuild": "^0.17.17",
-    "web-ext": "^7.6.1"
+    "esbuild": "^0.18.17",
+    "web-ext": "^7.6.2"
   },
   "type": "module",
   "dependencies": {
     "common-web-styles": "github:ayes-web/common-web-styles",
     "webextension-polyfill": "^0.10.0",
-    "xterm": "^5.1.0",
+    "xterm": "^5.2.1",
+    "xterm-addon-fit": "^0.7.0",
     "xterm-addon-web-links": "^0.8.0"
   }
 }

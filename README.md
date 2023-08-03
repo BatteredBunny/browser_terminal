@@ -1,22 +1,23 @@
 # browser-terminal-extension
 
-Extension that allows you to open a native shell in the browser
+Extension that allows you to open a native terminal in the browser. Tested in linux and macos.
 
-Untested on windows
-
-```
-git clone https://github.com/ayes-web/browser-terminal-extension
-pnpm install
-```
+![screenshot.png](screenshot.png)
 
 ## Dependencies
    - golang
    - nodejs + npm/pnpm
 
-## Running with firefox in development mode
+## Basic development usage
+
+```bash
+git clone https://github.com/ayes-web/browser-terminal-extension
+cd browser-terminal-extension
+pnpm install
+pnpm start # or pnpm start:chrome if on google chrome
 ```
-pnpm start
-```
+
+After that click on the extension icon in browser
 
 ## Installing unpacked extension to firefox
 
@@ -30,9 +31,3 @@ pnpm build
 1. Navigate to ``about:debugging#/runtime/this-firefox``
 2. Click ``Load temporary Add-on...``
 3. Choose ``dist`` folder in the file picker
-
-## Usage
-
-- Click on the extension icon
-
-![screenshot.png](screenshot.png)

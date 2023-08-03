@@ -3,5 +3,5 @@ node_modules
 .vscode
 dist
 web-ext-artifacts
-native/browser_terminal
+native/browser-terminal-extension
 .DS_STORE
