@@ -10,8 +10,8 @@
     "build": "npm run extension build",
     "lint": "web-ext lint -s src",
     "sign": "web-ext sign",
-    "native-manifest": "node native_manifest.js",
-    "extension": "node extension.js",
+    "native-manifest": "node scripts/native_manifest.js",
+    "extension": "node scripts/extension.js",
     "build_native": "go build -C native",
     "clean": "rm -rf ./dist ./node_modules ./native/browser-terminal-extension"
   },
