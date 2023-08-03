@@ -42,6 +42,7 @@ async function dev_build() {
 }
 
 switch (process.argv[2]) {
+    case "start:firefox":
     case "start":
         WEBEXT_OPTIONS.target = "firefox-desktop"
         await dev_build()

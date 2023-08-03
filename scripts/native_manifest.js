@@ -25,11 +25,15 @@ const MANIFEST = {
     "description": "Extension that allows you to open a native shell in the browser",
     "path": NATIVE_APP_PATH,
     "type": "stdio",
-    "allowed_origins": ["chrome-extension://ljjadcjbpfpnfgaomjlbamjddjamlcpf/"]
+    "allowed_origins": ["chrome-extension://gjgdcpkpomljongdfoacnjagbglgimcn/"]
+}
+
+function expand_home(path) {
+    return path.replace(/^~\//, os.homedir() + '/');
 }
 
 function manifest_path_build(manifest_path) {
-    return path.join(manifest_path, MANIFEST.name + '.json').replace(/^~\//, os.homedir() + '/');
+    return expand_home(path.join(manifest_path, MANIFEST.name + '.json'))
 }
 
 function get_manifest_path(browser) {
@@ -39,7 +43,7 @@ function get_manifest_path(browser) {
         process.exit(1);
     }
 
-    fs.mkdirSync(manifest_path, { recursive: true } );
+    fs.mkdirSync(expand_home(manifest_path), { recursive: true } );
 
     return manifest_path_build(manifest_path)
 }
