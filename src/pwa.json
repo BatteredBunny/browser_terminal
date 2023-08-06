@@ -1,0 +1,15 @@
+{
+    "name": "Browser terminal",
+    "short_name": "Terminal",
+    "start_url": "/html/terminal.html",
+    "display": "standalone",
+    "background_color": "#fff",
+    "description": "Terminal emulator extension for browser",
+    "icons": [
+        {
+            "src": "icons/icon.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

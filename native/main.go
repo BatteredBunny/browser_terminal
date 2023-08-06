@@ -4,10 +4,13 @@ import (
 	"bufio"
 	"encoding/binary"
 	"encoding/json"
+	"flag"
 	"io"
 	"log"
 	"os"
 	"os/exec"
+
+	"github.com/ayes-web/browser_terminal/manifest"
 )
 
 func stdinWorker(c chan map[string]any) {
@@ -77,7 +80,29 @@ func sendMessage[T Message | DebugMessage](m T, w io.Writer) (err error) {
 	return
 }
 
+type Flags struct {
+	Install   bool
+	Uninstall bool
+}
+
 func main() {
+	flags := Flags{}
+	flag.BoolVar(&flags.Install, "install", false, "Install native manifest for browsers")
+	flag.BoolVar(&flags.Uninstall, "uninstall", false, "Uninstall native manifest for browsers")
+	flag.Parse()
+
+	if flags.Install {
+		if err := manifest.Install(); err != nil {
+			log.Fatalln(err)
+		}
+		os.Exit(0)
+	} else if flags.Uninstall {
+		if err := manifest.Uninstall(); err != nil {
+			log.Fatalln(err)
+		}
+		os.Exit(0)
+	}
+
 	stdinQueue := make(chan map[string]any)
 
 	go stdinWorker(stdinQueue)
@@ -87,7 +112,7 @@ func main() {
 		cmd.Dir = dir
 	}
 
-	cmd.Env = append(cmd.Environ(), "TERM_PROGRAM=browser-terminal-extension")
+	cmd.Env = append(cmd.Environ(), "TERM_PROGRAM="+extension_name)
 
 	processCommands(stdinQueue, cmd)
 }

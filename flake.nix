@@ -17,10 +17,13 @@
           buildInputs = [
             go
             nodePackages.pnpm
+            nodePackages.web-ext
+            esbuild
           ];
         };
 
         packages.native = callPackage ./native.nix { };
+        packages.default = callPackage ./build.nix { };
       }
     );
 }
