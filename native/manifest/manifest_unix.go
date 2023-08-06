@@ -21,6 +21,7 @@ const genericManifest = `{
 }`
 
 const chromiumID = "chrome-extension://nbnfihffeffdhcbblmekelobgmdccfnl/"
+const edgeID = "chrome-extension://dboagbeogaikhnjldgdighffjfejpeoj/"
 const firefoxID = "browser_terminal@sly.ee"
 
 func buildManifestFirefox(path string) []byte {
@@ -29,6 +30,10 @@ func buildManifestFirefox(path string) []byte {
 
 func buildManifestChromium(path string) []byte {
 	return []byte(fmt.Sprintf(genericManifest, path, "allowed_origins", chromiumID))
+}
+
+func buildManifestEdge(path string) []byte {
+	return []byte(fmt.Sprintf(genericManifest, path, "allowed_origins", edgeID))
 }
 
 func expandPath(p string) (res string, err error) {
@@ -70,9 +75,11 @@ func Install() (err error) {
 
 		var builtManifest []byte
 		switch name {
+		case "edge":
+			builtManifest = buildManifestEdge(binaryLocation)
 		case "tor-browser", "librewolf", "firefox":
 			builtManifest = buildManifestFirefox(binaryLocation)
-		case "chrome", "chromium", "vivaldi", "edge":
+		case "chrome", "chromium", "vivaldi":
 			builtManifest = buildManifestChromium(binaryLocation)
 		}
 
