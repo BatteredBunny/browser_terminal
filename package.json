@@ -1,12 +1,13 @@
 {
   "name": "browser_terminal",
-  "version": "1.4.0",
+  "version": "1.4.2",
   "description": "Extension that allows you to open a native shell in the browser",
   "scripts": {
     "start": "npm run start:firefox",
     "start:chrome": "npm run build_native && npm run manifest:install && npm run extension start:chrome; npm run manifest:uninstall",
     "start:firefox": "npm run build_native && npm run manifest:install && npm run extension start:firefox; npm run manifest:uninstall",
     "build": "npm run extension build",
+    "build:chromium": "npm run extension build:chromium",
     "lint": "web-ext lint -s src",
     "sign": "npm run build && web-ext sign -s dist",
     "manifest:install": "npm run build_native && ./native/browser_terminal --install",

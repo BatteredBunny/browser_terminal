@@ -1,7 +1,7 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Browser terminal",
-  "version": "1.4.0",
+  "version": "1.4.2",
   "description": "Extension that allows you to open a native shell in the browser",
   "icons": {
     "512": "icons/icon.png"
@@ -9,26 +9,32 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "browser_terminal@sly.ee",
-      "strict_min_version": "68.0"
+      "strict_min_version": "101.0"
     }
   },
   "permissions": [
     "nativeMessaging"
   ],
-  "browser_action": {
-    "default_area": "navbar"
+  "action": {
+    "default_area": "navbar",
+    "default_title": "New terminal"
   },
   "web_accessible_resources": [
-    "html/terminal.html",
-    "css/terminal.css",
-    "js/terminal.js",
-    "icons/icon.png",
-    "fonts/Fira Code Regular Nerd Font Complete Mono.ttf",
-    "fonts/Fira Code Bold Nerd Font Complete Mono.ttf"
+    {
+      "resources": [
+        "html/terminal.html",
+        "css/terminal.css",
+        "js/terminal.js",
+        "icons/icon.png",
+        "fonts/Fira Code Regular Nerd Font Complete Mono.ttf",
+        "fonts/Fira Code Bold Nerd Font Complete Mono.ttf"
+      ],
+      "matches": [
+        "*://*/*"
+      ]
+    }
   ],
   "background": {
-    "scripts": [
-      "/js/background.js"
-    ]
+    "scripts": ["/js/background.js"]
   }
 }

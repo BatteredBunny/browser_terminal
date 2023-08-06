@@ -1,3 +1,3 @@
-chrome.browserAction.onClicked.addListener(async () => {
+chrome.action.onClicked.addListener(async () => {
     await chrome.tabs.create({ url: chrome.runtime.getURL("/html/terminal.html") });
 })
