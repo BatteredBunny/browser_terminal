@@ -70,11 +70,9 @@ func Install() (err error) {
 
 		var builtManifest []byte
 		switch name {
-		case "firefox":
+		case "tor-browser", "librewolf", "firefox":
 			builtManifest = buildManifestFirefox(binaryLocation)
-		case "chrome":
-			fallthrough
-		case "chromium":
+		case "chrome", "chromium", "vivaldi", "edge":
 			builtManifest = buildManifestChromium(binaryLocation)
 		}
 
