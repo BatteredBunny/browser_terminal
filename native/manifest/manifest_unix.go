@@ -20,7 +20,7 @@ const genericManifest = `{
     "%s": ["%s"]
 }`
 
-const chromiumID = "chrome-extension://gdjibmflgpmfkcgaclgbankhpakiabhe/"
+const chromiumID = "chrome-extension://nbnfihffeffdhcbblmekelobgmdccfnl/"
 const firefoxID = "browser_terminal@sly.ee"
 
 func buildManifestFirefox(path string) []byte {
