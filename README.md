@@ -1,4 +1,4 @@
-# browser-terminal-extension
+# browser terminal extension
 
 Extension that allows you to open a native terminal in the browser. Tested in linux and macos.
 
@@ -6,15 +6,15 @@ Extension that allows you to open a native terminal in the browser. Tested in li
 
 ## Dependencies
    - golang
-   - nodejs + npm/pnpm
+   - nodejs + npm/yarn
 
 ## Basic development usage
 
 ```bash
-git clone https://github.com/ayes-web/browser-terminal-extension
-cd browser-terminal-extension
-pnpm install
-pnpm start # or pnpm start:chrome if on google chrome
+git clone https://github.com/ayes-web/browser_terminal
+cd browser_terminal
+yarn install
+yarn start # or yarn start:chrome if on google chrome
 ```
 
 After that click on the extension icon in browser

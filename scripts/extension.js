@@ -2,6 +2,7 @@ import fs from "fs";
 import esbuild from "esbuild";
 import path from "path";
 import webExt from 'web-ext';
+import { sassPlugin } from 'esbuild-sass-plugin';
 
 // Recursively finds all files
 function find(dir) {
@@ -25,7 +26,9 @@ const ESBUILD_OPTIONS = {
     outdir: BUILD_DIR,
     allowOverwrite: true,
     minify: true,
-    loader: {".json": "copy", ".png": "copy", ".html": "copy", ".ttf": "copy"},
+    loader: { ".json": "copy", ".png": "copy", ".html": "copy", ".ttf": "copy" },
+    external: ['*.ttf'],
+    plugins: [sassPlugin()]
 }
 
 const WEBEXT_OPTIONS = {
@@ -39,6 +42,18 @@ async function dev_build() {
     ESBUILD_OPTIONS.minify = false
     let ctx = await esbuild.context(ESBUILD_OPTIONS);
     await ctx.watch()
+}
+
+try {
+    fs.rmSync(BUILD_DIR, { recursive: true, force: true })
+} catch (error) {
+
+}
+
+try {
+    fs.mkdirSync(BUILD_DIR)
+} catch (error) {
+
 }
 
 switch (process.argv[2]) {

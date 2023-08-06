@@ -1,4 +1,4 @@
-module github.com/ayes-web/browser-terminal-extension
+module github.com/ayes-web/browser_terminal
 
 go 1.20
 
