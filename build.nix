@@ -5,7 +5,7 @@
 }: let
   buildExtension = pkgs.mkYarnPackage rec {
     name = "browser_terminal";
-    version = "1.4.2";
+    version = "1.4.3";
 
     src = ./.;
 

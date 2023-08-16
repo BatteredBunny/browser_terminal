@@ -1,6 +1,6 @@
 {
   "name": "browser_terminal",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Extension that allows you to open a native shell in the browser",
   "scripts": {
     "start": "npm run start:firefox",

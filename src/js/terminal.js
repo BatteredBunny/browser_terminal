@@ -7,6 +7,7 @@ import browser from "webextension-polyfill";
 const TERMINAL = document.getElementById("terminal");
 const BANNER = document.getElementById("banner");
 const KILL_BUTTON = document.getElementById("kill_button");
+const NEW_TAB_BUTTON = document.getElementById("new_tab_button");
 
 const EXTENSION_NAME = "browser_terminal";
 let port = browser.runtime.connectNative(EXTENSION_NAME);
@@ -60,4 +61,9 @@ port.onMessage.addListener((response) => {
 
 KILL_BUTTON.addEventListener("click", () => {
     send_signal(10)
+    window.close()
+})
+
+NEW_TAB_BUTTON.addEventListener("click", () => {
+    window.open("/html/terminal.html")
 })
