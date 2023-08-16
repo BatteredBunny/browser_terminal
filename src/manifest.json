@@ -1,15 +1,15 @@
 {
   "manifest_version": 3,
   "name": "Browser terminal",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Extension that allows you to open a native shell in the browser",
   "icons": {
     "512": "icons/icon.png"
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "browser_terminal@sly.ee",
-      "strict_min_version": "101.0"
+      "id": "browser_terminal@catnip.ee",
+      "strict_min_version": "109.0"
     }
   },
   "permissions": [

@@ -22,7 +22,7 @@ const genericManifest = `{
 
 const chromiumID = "chrome-extension://nbnfihffeffdhcbblmekelobgmdccfnl/"
 const edgeID = "chrome-extension://dboagbeogaikhnjldgdighffjfejpeoj/"
-const firefoxID = "browser_terminal@sly.ee"
+const firefoxID = "browser_terminal@catnip.ee"
 
 func buildManifestFirefox(path string) []byte {
 	return []byte(fmt.Sprintf(genericManifest, path, "allowed_extensions", firefoxID))
