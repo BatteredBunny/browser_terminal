@@ -1,6 +1,6 @@
 # browser terminal extension
 
-Extension that allows you to open a native terminal in the browser. Tested in linux and macos. [Installation instructions](https://github.com/ayes-web/browser_terminal/blob/main/installation.md)
+Extension that allows you to open a native terminal in the browser. Tested in linux and macos. [Installation instructions](https://github.com/BatteredBunny/browser_terminal/blob/main/installation.md)
 
 ![screenshot.png](screenshot.png)
 
@@ -13,7 +13,7 @@ Extension that allows you to open a native terminal in the browser. Tested in li
 ## Basic development usage
 
 ```bash
-git clone https://github.com/ayes-web/browser_terminal
+git clone https://github.com/BatteredBunny/browser_terminal
 cd browser_terminal
 yarn install
 yarn start # or yarn start:chrome if on google chrome

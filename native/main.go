@@ -10,7 +10,7 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/ayes-web/browser_terminal/manifest"
+	"github.com/BatteredBunny/browser_terminal/manifest"
 )
 
 func stdinWorker(c chan map[string]any) {
