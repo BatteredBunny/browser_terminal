@@ -19,14 +19,16 @@
           devShells.default = mkShell {
             buildInputs = [
               go
-              nodePackages.pnpm
+              yarn
               nodePackages.web-ext
               esbuild
             ];
           };
 
-          packages.native = callPackage ./native.nix {};
-          packages.default = callPackage ./build.nix {};
+          packages = {
+            native = callPackage ./native.nix {};
+            default = callPackage ./build.nix {};
+          };
         }
     );
 }

@@ -6,3 +6,4 @@ web-ext-artifacts
 native/browser_terminal
 .DS_STORE
 result
+.direnv

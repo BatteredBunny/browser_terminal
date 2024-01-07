@@ -3,7 +3,7 @@ buildGoModule {
   src = ./native;
 
   name = "browser_terminal";
-  vendorSha256 = "sha256-WUQHf1LuD3YqaUDSmKaimnIa6pfKqvjf257pDO3P9KQ=";
+  vendorHash = "sha256-0YjTtWRNfwRe2PdkvxZmLQEiJ4LgQ8nNEqcLiiE+YB0=";
 
   GOFLAGS = "-trimpath";
 
