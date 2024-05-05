@@ -23,11 +23,11 @@ After that click on the extension icon in browser
 
 ### 1. Install native manifest & build extension
 ```
-pnpm native-manifest install
-pnpm build
+yarn manifest:install
+yarn build
 ```
 
 ### 2. Install extension to firefox
 1. Navigate to ``about:debugging#/runtime/this-firefox``
 2. Click ``Load temporary Add-on...``
-3. Choose ``dist`` folder in the file picker
+3. Choose ``manifest.json`` in ``dist`` folder in the file picker

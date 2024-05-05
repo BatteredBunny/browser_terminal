@@ -40,12 +40,13 @@ body {
     .window-header {
         padding: 5px 10px 0 10px;
         display: flex;
-        flex-direction: row;
         justify-content: space-between;
+        gap: 20px;
 
         .header-title {
             font-size: large;
             font-weight: bold;
+            flex-grow: 1;
         }
     }
 

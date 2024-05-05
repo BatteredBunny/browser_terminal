@@ -84,9 +84,9 @@ func processCommands(c chan map[string]any, cmd *exec.Cmd) {
 	}()
 
 	for msg := range c {
-		if command, exits := msg["command"]; exits {
+		if command, exists := msg["command"]; exists {
 			ptmx.WriteString(command.(string))
-		} else if signal, exits := msg["signal"]; exits {
+		} else if signal, exists := msg["signal"]; exists {
 			cmd.Process.Signal(signal.(os.Signal))
 		}
 	}
