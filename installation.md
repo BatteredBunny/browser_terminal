@@ -4,8 +4,8 @@
 
 2. Download native program from https://github.com/BatteredBunny/browser_terminal/releases
 3. Installing the binary
-    - Linux: ``sudo mv ~/Downloads/browser_terminal_linux_x86_64 /usr/local/bin/browser_terminal``
-    - MacOS: ``sudo mv ~/Downloads/browser_terminal_macos_aarch64  /usr/local/bin/browser_terminal``
+    - Linux: ``sudo mv ~/Downloads/browser_terminal_linux /usr/local/bin/browser_terminal``
+    - MacOS: ``sudo mv ~/Downloads/browser_terminal_macos  /usr/local/bin/browser_terminal``
 4. Install the native manifest: ```browser_terminal --install```
 
 Done!
