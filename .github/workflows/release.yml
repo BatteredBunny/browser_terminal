@@ -1,0 +1,77 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - name: Build and package
+        run: |
+          nix build .#native
+          cp result/bin/browser_terminal browser_terminal_macos
+      - name: Upload macos artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos
+          path: browser_terminal_macos
+
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - name: Build and package
+        run: |
+          nix build .#native
+          cp result/bin/browser_terminal browser_terminal_linux
+      - name: Upload linux artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux
+          path: browser_terminal_linux
+
+  build-extension:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - name: Build and package
+        run: nix build .#extension
+      - name: Upload extension artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: extensions
+          path: result/*.zip
+
+  release:
+    needs: [build-macos, build-linux, build-extension]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download macos artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: macos
+          path: macos
+      - name: Download linux artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: linux
+          path: linux
+      - name: Download extension artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: extensions
+          path: extensions
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            linux/browser_terminal_linux
+            macos/browser_terminal_macos
+            extensions/*
