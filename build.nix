@@ -1,17 +1,16 @@
-{
-  pkgs,
-  lib,
-  ...
-}: let
+{ pkgs
+, ...
+}:
+let
   buildExtension = pkgs.mkYarnPackage rec {
     name = "browser_terminal";
-    version = "1.4.4";
+    version = "1.4.5";
 
     src = ./.;
 
     offlineCache = pkgs.fetchYarnDeps {
       yarnLock = src + "/yarn.lock";
-      hash = "sha256-a/SZlozlXZWOQGsSenxAm14KVQIew1YeSZXUJPL+fU4=";
+      hash = "sha256-4v9KGEmS0Ed3xiY/qzXHOlGFieMqo0ddQnjHaUhp/Cw=";
     };
 
     buildPhase = ''
@@ -29,4 +28,4 @@
     '';
   };
 in
-  buildExtension
+buildExtension

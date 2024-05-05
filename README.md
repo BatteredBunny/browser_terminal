@@ -4,8 +4,6 @@ Extension that allows you to open a native terminal in the browser. Tested in li
 
 ![screenshot.png](screenshot.png)
 
-
-
 ## Dependencies
    - golang
    - nodejs + npm/yarn

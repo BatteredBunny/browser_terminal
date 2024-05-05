@@ -7,3 +7,4 @@ native/browser_terminal
 .DS_STORE
 result
 .direnv
+yarn-error.log

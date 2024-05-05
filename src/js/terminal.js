@@ -1,6 +1,6 @@
-import { Terminal } from "xterm";
-import { WebLinksAddon } from "xterm-addon-web-links";
-import { FitAddon } from 'xterm-addon-fit';
+import { Terminal } from "@xterm/xterm";
+import { WebLinksAddon } from "@xterm/addon-web-links";
+import { FitAddon } from '@xterm/addon-fit';
 
 import browser from "webextension-polyfill";
 
