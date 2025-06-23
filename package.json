@@ -1,6 +1,6 @@
 {
   "name": "browser_terminal",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "description": "Extension that allows you to open a native shell in the browser",
   "scripts": {
     "start": "npm run start:firefox",
@@ -24,7 +24,6 @@
     "@xterm/addon-fit": "0.10.0",
     "@xterm/addon-web-links": "0.11.0",
     "@xterm/xterm": "5.5.0",
-    "common-web-styles": "github:BatteredBunny/common-web-styles",
     "esbuild": "0.25.5",
     "esbuild-sass-plugin": "3.3.1",
     "web-ext": "8.8.0",

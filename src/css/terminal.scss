@@ -1,5 +1,4 @@
 @import "@xterm/xterm/css/xterm.css";
-@import "common-web-styles/common.scss";
 
 @font-face {
     font-family: "FiraCode Nerd Font Mono";
@@ -18,11 +17,15 @@ body {
     font-family: "FiraCode Nerd Font Mono", monospace;
 }
 
+:root {
+    color-scheme: light dark;
+}
+
 .banner {
     padding: 5px;
     color: transparent;
     text-align: center;
-    position: sticky;
+    position: absolute;
     top: 0;
     z-index: 1;
 }
@@ -33,14 +36,19 @@ body {
 }
 
 .terminal-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
     margin: 0 5px 0 5px;
     background-color: var(--interactive-background-color);
     border-radius: 5px;
 
     .window-header {
-        padding: 5px 10px 0 10px;
+        flex: 0 1 auto;
         display: flex;
         justify-content: space-between;
+        padding: 5px 10px 0 10px;
         gap: 20px;
 
         .header-title {
@@ -54,5 +62,6 @@ body {
         border-radius: 5px;
         padding: 5px;
         overflow: scroll;
+        flex: 1 1 auto;
     }
 }

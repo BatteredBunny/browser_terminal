@@ -6,8 +6,7 @@ This project is mostly done as a joke and you should use an actual terminal emul
 
 [firefox addons](https://addons.mozilla.org/en-US/firefox/addon/browser_terminal/), [chrome web store](https://chrome.google.cm/webstore/detail/browser-terminal/nbnfihffeffdhcbblmekelobgmdccfnl)
 
-
-![screenshot.png](screenshot.png)
+https://github.com/user-attachments/assets/16152edf-1446-478c-acd4-7168e4e20200
 
 # Manual installation
 
