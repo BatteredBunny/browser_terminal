@@ -1,5 +1,5 @@
 module github.com/BatteredBunny/browser_terminal
 
-go 1.22.2
+go 1.24.4
 
-require github.com/creack/pty v1.1.21
+require github.com/creack/pty v1.1.24

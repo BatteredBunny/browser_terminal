@@ -3,7 +3,7 @@ buildGoModule {
   src = ./native;
 
   name = "browser_terminal";
-  vendorHash = "sha256-0YjTtWRNfwRe2PdkvxZmLQEiJ4LgQ8nNEqcLiiE+YB0=";
+  vendorHash = "sha256-KTzxPnXE4vvPy20h72AayzKM1gHpag5VKtsjiFtB/6o=";
 
   ldflags = [
     "-s"
