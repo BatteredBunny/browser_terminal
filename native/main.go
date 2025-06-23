@@ -107,7 +107,12 @@ func main() {
 
 	go stdinWorker(stdinQueue)
 
-	cmd := exec.Command("/bin/sh")
+	shell := "/bin/sh"
+	if rawShell := os.Getenv("SHELL"); rawShell != "" {
+		shell = rawShell
+	}
+
+	cmd := exec.Command(shell)
 	if dir, err := os.UserHomeDir(); err == nil {
 		cmd.Dir = dir
 	}
