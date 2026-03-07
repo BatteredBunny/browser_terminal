@@ -14,8 +14,8 @@ https://github.com/user-attachments/assets/16152edf-1446-478c-acd4-7168e4e20200
 
 ### 1. Install native manifest & build extension
 ```
-yarn manifest:install
-yarn build
+pnpm manifest:install
+pnpm build
 ```
 
 ### 2. Install extension to firefox
@@ -28,8 +28,8 @@ yarn build
 ```bash
 git clone https://github.com/BatteredBunny/browser_terminal
 cd browser_terminal
-yarn install
-yarn start # or yarn start:chrome if on google chrome
+pnpm install
+pnpm start # or pnpm start:chrome if on google chrome
 ```
 
 After that click on the extension icon in browser

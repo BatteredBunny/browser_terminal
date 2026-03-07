@@ -1,31 +1,44 @@
-{ pkgs
-, ...
+{
+  nodejs,
+  pnpmConfigHook,
+  pnpm_10,
+  stdenv,
+  fetchPnpmDeps,
 }:
 let
-  buildExtension = pkgs.mkYarnPackage rec {
-    name = "browser_terminal";
-    version = "1.4.7";
-
-    src = ./.;
-
-    offlineCache = pkgs.fetchYarnDeps {
-      yarnLock = src + "/yarn.lock";
-      hash = "sha256-6UDKEaysCXbHHhiXgLNeZphEzl75F9WonLn8PEag/4U=";
-    };
-
-    buildPhase = ''
-      export HOME=$(mktemp -d)
-      mkdir -p $out/unpacked-firefox
-
-      # firefox
-      yarn --offline build
-      cp -r deps/${name}/dist $out/unpacked-firefox
-      mv deps/${name}/web-ext-artifacts/${name}-${version}.zip $out/firefox-${name}-${version}.zip
-
-      # chromium
-      yarn --offline build:chromium
-      mv deps/${name}/web-ext-artifacts/${name}-${version}.zip $out/chromium-${name}-${version}.zip
-    '';
-  };
+  pnpm = pnpm_10;
 in
-buildExtension
+stdenv.mkDerivation (finalAttrs: {
+  pname = "browser_terminal";
+  version = "1.4.7";
+
+  src = ./.;
+
+  nativeBuildInputs = [
+    nodejs
+    pnpmConfigHook
+    pnpm
+  ];
+
+  pnpmDeps = fetchPnpmDeps {
+    inherit (finalAttrs) pname version;
+    inherit pnpm;
+    src = ./.;
+    fetcherVersion = 3;
+    hash = "sha256-JENH/+xjlLWQPagb1ZDB+uEF/NlqU4BZIJ/SK0Scc5Q=";
+  };
+
+  buildPhase = ''
+    export HOME=$(mktemp -d)
+    mkdir -p $out/unpacked-firefox
+
+    # firefox
+    pnpm build
+    cp -r dist $out/unpacked-firefox
+    mv web-ext-artifacts/${finalAttrs.pname}-${finalAttrs.version}.zip $out/firefox-${finalAttrs.pname}-${finalAttrs.version}.zip
+
+    # chromium
+    pnpm build:chromium
+    mv web-ext-artifacts/${finalAttrs.pname}-${finalAttrs.version}.zip $out/chromium-${finalAttrs.pname}-${finalAttrs.version}.zip
+  '';
+})

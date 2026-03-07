@@ -38,7 +38,7 @@
           default = pkgs.mkShell {
             buildInputs = with pkgs; [
               go
-              yarn
+              pnpm
               nodePackages.web-ext
               esbuild
             ];
