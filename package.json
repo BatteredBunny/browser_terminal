@@ -17,7 +17,7 @@
     "clean": "rm -rf ./dist ./node_modules ./native/browser_terminal"
   },
   "devDependencies": {
-    "@types/firefox-webext-browser": "120.0.4"
+    "@types/firefox-webext-browser": "143.0.0"
   },
   "type": "module",
   "dependencies": {
