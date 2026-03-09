@@ -8,7 +8,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
-	"sync"
+	"time"
 
 	"github.com/creack/pty"
 )
@@ -33,40 +33,52 @@ func (w NativeMessageWriter) Flush() error {
 
 func (w NativeMessageWriter) ReadFrom(r io.Reader) (totalBytes int64, err error) {
 	ptmxReader := bufio.NewReader(r)
-
-	var runes []rune
-	var runesMutex sync.Mutex
+	dataCh := make(chan []byte, 16)
 
 	go func() {
-		var foundRune rune
-		var byteAmount int
-
+		buf := make([]byte, 4096)
 		for {
-			foundRune, byteAmount, err = ptmxReader.ReadRune()
-			if err != nil {
+			n, readErr := ptmxReader.Read(buf)
+			if n > 0 {
+				totalBytes += int64(n)
+				chunk := make([]byte, n)
+				copy(chunk, buf[:n])
+				dataCh <- chunk
+			}
+			if readErr != nil {
 				continue
 			}
-			totalBytes += int64(byteAmount)
-
-			runesMutex.Lock()
-			runes = append(runes, foundRune)
-			runesMutex.Unlock()
 		}
 	}()
 
-	for {
-		runesMutex.Lock()
-		if len(runes) > 0 {
-			if err = newMessage(string(runes)).send(w); err != nil {
-				runesMutex.Unlock()
-				continue
-			}
+	// Batch messages every 5ms
+	ticker := time.NewTicker(5 * time.Millisecond)
+	defer ticker.Stop()
 
-			w.Flush()
+	var buffer []byte
 
-			runes = []rune{}
+	flush := func() {
+		if len(buffer) == 0 {
+			return
 		}
-		runesMutex.Unlock()
+		if err = newMessage(string(buffer)).send(w); err == nil {
+			w.Flush()
+		}
+		buffer = buffer[:0]
+	}
+
+	for {
+		select {
+		case chunk := <-dataCh:
+			buffer = append(buffer, chunk...)
+
+			// Flush immediately if too much data
+			if len(buffer) >= 4096 {
+				flush()
+			}
+		case <-ticker.C:
+			flush()
+		}
 	}
 }
 

@@ -13,7 +13,8 @@ https://github.com/user-attachments/assets/16152edf-1446-478c-acd4-7168e4e20200
 ## Installing unpacked extension to firefox
 
 ### 1. Install native manifest & build extension
-```
+
+```bash
 pnpm manifest:install
 pnpm build
 ```

@@ -4,8 +4,8 @@
   "description": "Extension that allows you to open a native shell in the browser",
   "scripts": {
     "start": "pnpm start:firefox",
-    "start:chrome": "pnpm build_native && pnpm manifest:install && pnpm extension start:chrome; pnpm manifest:uninstall",
-    "start:firefox": "pnpm build_native && pnpm manifest:install && pnpm extension start:firefox; pnpm manifest:uninstall",
+    "start:chrome": "pnpm build && pnpm build_native && pnpm manifest:install && pnpm extension start:chrome; pnpm manifest:uninstall",
+    "start:firefox": "pnpm build && pnpm build_native && pnpm manifest:install && pnpm extension start:firefox; pnpm manifest:uninstall",
     "build": "pnpm extension build",
     "build:chromium": "pnpm extension build:chromium",
     "lint": "web-ext lint -s src",

@@ -41,6 +41,7 @@ const WEBEXT_OPTIONS = {
 async function dev_build() {
     ESBUILD_OPTIONS.minify = false
     let ctx = await esbuild.context(ESBUILD_OPTIONS);
+    await ctx.rebuild()
     await ctx.watch()
 }
 
