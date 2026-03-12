@@ -25,7 +25,7 @@ stdenv.mkDerivation (finalAttrs: {
     inherit pnpm;
     src = ./.;
     fetcherVersion = 3;
-    hash = "sha256-FiyfhskRdsDGGbQSZvAJ+HYOuL9uYg9ZaZPOwvf8nzc=";
+    hash = "sha256-86/mHUGKv9GahtRreImMCIDCAf8F+SJROYOA5c1Xnbk=";
   };
 
   buildPhase = ''
